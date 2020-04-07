@@ -1,0 +1,15 @@
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.imports]]
+    path = "github.com/twitter/twemoji"
+    [[module.imports.mounts]]
+      source = "assets/72x72"
+      target = "static/twemoji/png"
+    [[module.imports.mounts]]
+      source = "assets/svg"
+      target = "static/twemoji/svg"
+    [[module.imports.mounts]]
+      source = "scripts"
+      target = "static/twemoji/js"
