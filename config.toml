@@ -10,6 +10,3 @@
     [[module.imports.mounts]]
       source = "assets/svg"
       target = "static/twemoji/svg"
-    [[module.imports.mounts]]
-      source = "scripts"
-      target = "static/twemoji/js"

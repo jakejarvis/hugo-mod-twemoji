@@ -16,6 +16,28 @@ Add the module to your Hugo project's `config.toml`:
 
 The graphics will be mounted in `static/twemoji/png` and `static/twemoji/svg`, and the scripts in `static/twemoji/js`.
 
+You'll want to call the script somewhere in your template or theme's `<head>`, for example:
+
+```go
+<script src="{{ "twemoji/js/twemoji.min.js" | absURL }}"></script>
+```
+
+...and then in order to actually swap out the emojis, you need to call the script's `.parse` method. This is where you can choose between PNGs or SVGs and tell the script where we've placed the graphics. A good starting point is:
+
+```html
+<script>
+  twemoji.parse(document.body, {{ dict "base" ("/" | absURL) "folder" "twemoji/svg" "ext" ".svg" | jsonify | safeJS }})
+</script>
+```
+
+After building the site this script will turn into something like:
+
+```html
+<script>
+  twemoji.parse(document.body, {"base": "https://hugo-mod-twemoji.netlify.com/", "ext": ".svg", "folder": "twemoji/svg"})
+</script>
+```
+
 ## License
 
 Twemoji graphics are licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) (CC-BY-4.0) by Twitter, Inc. and other contributors. Code is licensed under the [MIT License](http://opensource.org/licenses/MIT).
