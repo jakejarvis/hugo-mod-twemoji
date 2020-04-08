@@ -1,4 +1,7 @@
 [module]
+  [module.hugoVersion]
+    min = "0.64.1"
+    extended = false
   [[module.mounts]]
     source = "layouts"
     target = "layouts"
