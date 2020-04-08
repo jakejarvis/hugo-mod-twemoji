@@ -8,7 +8,7 @@ This [Hugo Module](https://gohugo.io/hugo-modules/) can be used to import the Tw
 
 ## 🤖 Usage
 
-Add the module to your Hugo project's `config.toml`:
+Give the [Hugo Modules documentation](https://gohugo.io/hugo-modules/) a read to prepare your project, and then add this module to your Hugo project's `config.toml`:
 
 ```toml
 [module]
@@ -16,7 +16,7 @@ Add the module to your Hugo project's `config.toml`:
   path = "github.com/jakejarvis/hugo-mod-twemoji"
 ```
 
-The graphics will be mounted in `static/twemoji/svg` and `static/twemoji/png`, and the minified script in `static/twemoji/js`.
+The graphics will be mounted in `static/twemoji/svg` and `static/twemoji/png`, and the [minified script](https://github.com/twitter/twemoji/blob/gh-pages/v/12.1.5/twemoji.min.js) in `static/twemoji/js`.
 
 Before you start, you'll probably want to [add Twitter's recommended CSS](https://github.com/twitter/twemoji#inline-styles) to your stylesheet to make sure the Twemojis match the size and alignment of the surrounding text — otherwise they'll be humongous:
 
@@ -31,7 +31,7 @@ img.emoji {
 
 ### ⚡ Quick Start
 
-For a quick start, a partial template is mounted at `layouts/partials/twemoji-js.html`, which does everything described in the section below for you. Include this somewhere near the bottom of your base template, before `</body>`:
+For a quick start, an optional [partial template](https://gohugo.io/templates/partials/) is mounted at `layouts/partials/twemoji.html`, which does everything described in the section below for you. Include this somewhere near the bottom of your base template, before `</body>`:
 
 ```go
 {{ partial "twemoji" . }}
