@@ -1,6 +1,6 @@
 # hugo-mod-twemoji 📦
 
-![twemoji-smileys-2014 (1)](https://user-images.githubusercontent.com/1703673/78717950-64b01680-78ef-11ea-9010-1055e014abbf.png)
+![](https://user-images.githubusercontent.com/1703673/78717950-64b01680-78ef-11ea-9010-1055e014abbf.png)
 
 [**Twemoji**](https://twemoji.twitter.com/) (Twitter Emoji) is an open-source library of every Unicode emoji ([all 3,245 of them!](https://emojipedia.org/twitter/)) uniquely redesigned in both SVG and PNG formats. It also provides a script to swap out system-native emojis for these graphics to achieve a uniform appearance across all browsers and platforms. 🙌
 
@@ -18,7 +18,28 @@ Add the module to your Hugo project's `config.toml`:
 
 The graphics will be mounted in `static/twemoji/svg` and `static/twemoji/png`, and the minified script in `static/twemoji/js`.
 
-You'll want to call the script somewhere in your template or theme's `<head>`, for example:
+Before you start, you'll probably want to [add Twitter's recommended CSS](https://github.com/twitter/twemoji#inline-styles) to your stylesheet to make sure the Twemojis match the size and alignment of the surrounding text — otherwise they'll be humongous:
+
+```css
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+```
+
+### ⚡ Quick Start
+
+For a quick start, a partial template is mounted at `layouts/partials/twemoji-js.html`, which does everything described in the section below for you. Include this somewhere near the bottom of your base template, before `</body>`:
+
+```go
+{{ partial "twemoji" . }}
+```
+
+### ⚙️ Manual
+
+If you don't use the partial, you'll want to call the script somewhere in your template or theme's `<head>`, for example:
 
 ```html
 <script src="{{ "twemoji/js/twemoji.min.js" | absURL }}"></script>
@@ -28,7 +49,7 @@ You'll want to call the script somewhere in your template or theme's `<head>`, f
 
 ```html
 <script>
-  twemoji.parse(document.body, {{ dict "base" ("/" | absURL) "folder" "twemoji/svg" "ext" ".svg" | jsonify | safeJS }})
+  twemoji.parse(document.body, {{ dict "base" ("/twemoji/" | absURL) "folder" "svg" "ext" ".svg" | jsonify | safeJS }})
 </script>
 ```
 
@@ -36,7 +57,7 @@ After building the site this small script will turn into something like:
 
 ```html
 <script>
-  twemoji.parse(document.body, {"base": "https://hugo-mod-twemoji.netlify.com/", "ext": ".svg", "folder": "twemoji/svg"})
+  twemoji.parse(document.body, {"base": "https://hugo-mod-twemoji.netlify.com/twemoji/", "ext": ".svg", "folder": "svg"})
 </script>
 ```
 
