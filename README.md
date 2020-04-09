@@ -1,4 +1,4 @@
-# hugo-mod-twemoji 📦
+# hugo-mod-twemoji 📦  [![CI](https://github.com/jakejarvis/hugo-mod-twemoji/workflows/CI/badge.svg)](https://github.com/jakejarvis/hugo-mod-twemoji/actions?query=workflow%3ACI)
 
 ![](https://user-images.githubusercontent.com/1703673/78717950-64b01680-78ef-11ea-9010-1055e014abbf.png)
 

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.68.3
+      HUGO_EXTENDED: true
+    steps:
+    - name: Checkout local copy of module
+      uses: actions/checkout@v2
+      with:
+        path: module
+        fetch-depth: 1
+    - name: Install Go 1.13.x
+      uses: actions/setup-go@v2-beta
+      with:
+        go-version: 1.13.x
+    - name: Install Hugo
+      run: |
+        wget --no-verbose https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_EXTENDED:+extended_}${HUGO_VERSION}_Linux-64bit.tar.gz
+        wget --no-verbose https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt
+        grep hugo_${HUGO_EXTENDED:+extended_}${HUGO_VERSION}_Linux-64bit.tar.gz hugo_${HUGO_VERSION}_checksums.txt | sha256sum -c
+        tar xf hugo_${HUGO_EXTENDED:+extended_}${HUGO_VERSION}_Linux-64bit.tar.gz
+        chmod +x ./hugo
+        ./hugo version
+    - name: Checkout gohugoio/hugoDocs
+      uses: actions/checkout@v2
+      with:
+        repository: gohugoio/hugoDocs
+        ref: 20d77860b2a992b4917af75a657419b19baafa43
+        path: docs
+        fetch-depth: 1
+    - name: Install local module & add to config.toml
+      run: |
+        cd docs
+        $GITHUB_WORKSPACE/hugo mod get github.com/jakejarvis/hugo-mod-twemoji
+        echo -e "[[module.imports]]\n  path = \"github.com/jakejarvis/hugo-mod-twemoji\"" >> config.toml
+        echo "replace github.com/jakejarvis/hugo-mod-twemoji => /home/runner/work/hugo-mod-twemoji/hugo-mod-twemoji/module" >> go.mod
+        $GITHUB_WORKSPACE/hugo mod get -u ./...
+        $GITHUB_WORKSPACE/hugo mod graph
+    - name: Build site
+      run: |
+        ./hugo --source docs/ --verbose
+    - name: Does twemoji.min.js exist?
+      run: |
+        test -f ./docs/public/twemoji/js/twemoji.min.js
+    - name: Are 🌈s imaginary??? (png)
+      run: |
+        test -f ./docs/public/twemoji/png/1f308.png
+    - name: Is 💓 even real?!?!??! (svg)
+      run: |
+        test -f ./docs/public/twemoji/svg/1f493.svg
