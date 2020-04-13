@@ -48,12 +48,9 @@ jobs:
     - name: Build site
       run: |
         ./hugo --source docs/ --verbose
-    - name: Does twemoji.min.js exist?
-      run: |
-        test -f ./docs/public/twemoji/js/twemoji.min.js
     - name: Are 🌈s imaginary??? (png)
       run: |
         test -f ./docs/public/twemoji/png/1f308.png
-    - name: Is 💓 even real?!?!??! (svg)
+    - name: Does true 💓 even exist?!?!??! (svg)
       run: |
         test -f ./docs/public/twemoji/svg/1f493.svg

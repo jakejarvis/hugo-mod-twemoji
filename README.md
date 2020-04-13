@@ -39,19 +39,22 @@ For a quick start, an optional [partial template](https://gohugo.io/templates/pa
 
 ### ⚙️ Manual
 
-If you don't use the partial, you'll want to call the script somewhere in your template or theme's `<head>`, for example:
+If you don't use the partial, you'll want to call the `js/twemoji.min.js` asset as [a resource](https://gohugo.io/hugo-pipes/introduction/) somewhere in your template or theme's `<head>`, for example:
 
 ```html
-<script src="{{ "twemoji/js/twemoji.min.js" | absURL }}"></script>
+{{ $twemoji := resources.Get "js/twemoji.min.js" }}
+<script src="{{ $twemoji.Permalink }}"></script>
 ```
 
 ...and then in order to actually swap out the emojis, you need to call the script's `twemoji.parse` method. This is where you can choose between SVGs (recommended) or 72x72 PNGs and tell the script where we've placed the graphics. The [official readme](https://github.com/twitter/twemoji#api) has a _lot_ of information about the API, but a good starting point is this one-liner:
 
 ```html
 <script>
-  twemoji.parse(document.body, {{ dict "base" ("/twemoji/" | absURL) "folder" "svg" "ext" ".svg" | jsonify | safeJS }})
+  twemoji.parse(document.body, {{ dict "base" ("twemoji/" | absURL) "folder" "svg" "ext" ".svg" | jsonify | safeJS }})
 </script>
 ```
+
+Simply change `svg` and `.svg` to `png` and `.png` respectively to use the provided 72x72 PNG icons instead.
 
 After building the site this small script will turn into something like:
 
