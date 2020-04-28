@@ -16,7 +16,7 @@ Give the [Hugo Modules documentation](https://gohugo.io/hugo-modules/) a read to
   path = "github.com/jakejarvis/hugo-mod-twemoji"
 ```
 
-The graphics will be mounted in `static/twemoji/svg` and `static/twemoji/png`, and the [minified script](https://github.com/twitter/twemoji/blob/gh-pages/v/12.1.5/twemoji.min.js) in `static/twemoji/js`.
+The graphics will be mounted in `static/twemoji/svg` and `static/twemoji/png`, and the [minified script](https://github.com/twitter/twemoji/blob/gh-pages/v/12.1.6/twemoji.min.js) in `static/twemoji/js`.
 
 Before you start, you'll probably want to [add Twitter's recommended CSS](https://github.com/twitter/twemoji#inline-styles) to your stylesheet to make sure the Twemojis match the size and alignment of the surrounding text — otherwise they'll be humongous:
 
