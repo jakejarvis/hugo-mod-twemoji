@@ -2,4 +2,4 @@ module github.com/jakejarvis/hugo-mod-twemoji
 
 go 1.13
 
-require github.com/twitter/twemoji v12.1.6+incompatible // indirect
+require github.com/twitter/twemoji v13.0.0+incompatible // indirect
