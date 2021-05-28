@@ -2,7 +2,7 @@
 
 ![](https://user-images.githubusercontent.com/1703673/78717950-64b01680-78ef-11ea-9010-1055e014abbf.png)
 
-[**Twemoji**](https://twemoji.twitter.com/) (Twitter Emoji) is an open-source library of every Unicode emoji ([all 3,245 of them!](https://emojipedia.org/twitter/)) uniquely redesigned in both SVG and PNG formats. It also provides a script to swap out system-native emojis for these graphics to achieve a uniform appearance across all browsers and platforms. 🙌
+[**Twemoji**](https://twemoji.twitter.com/) (Twitter Emoji) is an open-source library of every Unicode emoji ([all 3,500+ of them!](https://emojipedia.org/twitter/)) uniquely redesigned in both SVG and PNG formats. It also provides a script to swap out system-native emojis for these graphics to achieve a uniform appearance across all browsers and platforms. 🙌
 
 This [Hugo Module](https://gohugo.io/hugo-modules/) can be used to import the Twemoji graphics and scripts locally into your Hugo project, rather than making external calls to Twitter's CDN for each individual icon. 
 

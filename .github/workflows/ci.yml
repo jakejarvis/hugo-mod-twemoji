@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.68.3
+      HUGO_VERSION: 0.83.1
       HUGO_EXTENDED: true
     steps:
     - name: Checkout local copy of module
@@ -19,7 +19,7 @@ jobs:
         path: module
         fetch-depth: 1
     - name: Install Go 1.13.x
-      uses: actions/setup-go@v2-beta
+      uses: actions/setup-go@v2
       with:
         go-version: 1.13.x
     - name: Install Hugo
@@ -30,16 +30,17 @@ jobs:
         tar xf hugo_${HUGO_EXTENDED:+extended_}${HUGO_VERSION}_Linux-64bit.tar.gz
         chmod +x ./hugo
         ./hugo version
-    - name: Checkout gohugoio/hugoDocs
+    - name: Checkout gohugoio/hugoBasicExample
       uses: actions/checkout@v2
       with:
-        repository: gohugoio/hugoDocs
-        ref: 20d77860b2a992b4917af75a657419b19baafa43
-        path: docs
+        repository: gohugoio/hugoBasicExample
+        ref: 00188bc80985f84f6ee85e41f533dd4a19cae169
+        path: example
         fetch-depth: 1
     - name: Install local module & add to config.toml
       run: |
-        cd docs
+        cd example
+        $GITHUB_WORKSPACE/hugo mod init github.com/gohugoio/hugoBasicExample
         $GITHUB_WORKSPACE/hugo mod get github.com/jakejarvis/hugo-mod-twemoji
         echo -e "[[module.imports]]\n  path = \"github.com/jakejarvis/hugo-mod-twemoji\"" >> config.toml
         echo "replace github.com/jakejarvis/hugo-mod-twemoji => /home/runner/work/hugo-mod-twemoji/hugo-mod-twemoji/module" >> go.mod
@@ -47,10 +48,10 @@ jobs:
         $GITHUB_WORKSPACE/hugo mod graph
     - name: Build site
       run: |
-        ./hugo --source docs/ --verbose
+        ./hugo --source example/ --verbose
     - name: Are 🌈s imaginary??? (png)
       run: |
-        test -f ./docs/public/twemoji/png/1f308.png
+        test -f ./example/public/twemoji/png/1f308.png
     - name: Does true 💓 even exist?!?!??! (svg)
       run: |
-        test -f ./docs/public/twemoji/svg/1f493.svg
+        test -f ./example/public/twemoji/svg/1f493.svg
